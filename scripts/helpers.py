@@ -104,7 +104,8 @@ def cargar_dataset_raw(
     file_path,
     container_name,
     grupo,
-    contexto
+    contexto,
+    conexion
 ):
     logging.info(f"Subiendo dataset={dataset}")
 
@@ -128,7 +129,8 @@ def cargar_dataset_raw(
     upload_to_adls(
         local_file_path=file_path,
         container_name=container_name,
-        blob_name=blob_name
+        blob_name=blob_name,
+        wasb_conn_id=conexion
     )
 
     metadata = obtener_metadata_archivo(
