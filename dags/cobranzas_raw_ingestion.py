@@ -14,7 +14,8 @@ LOCAL_CARTERA = "/opt/airflow/data/cobranzas/cartera_diaria.csv"
 LOCAL_GESTIONES = "/opt/airflow/data/cobranzas/gestiones_diarias.csv"
 LOCAL_RECUPEROS = "/opt/airflow/data/cobranzas/recuperos_diarios.csv"
 
-CONTAINER_NAME = "airflow"
+CONTAINER_NAME = "datalake"
+WASB_CONN_ID = "utec_blob_storage"
 GRUPO = "G4"
 
 AUDIT_PATH = "/opt/airflow/logs/audit"
@@ -62,7 +63,8 @@ def dag_cobranzas_raw():
             file_path=LOCAL_CARTERA,
             container_name=CONTAINER_NAME,
             grupo=GRUPO,
-            contexto=contexto
+            contexto=contexto,
+            conexion=WASB_CONN_ID
         )
 
     @task
@@ -74,7 +76,8 @@ def dag_cobranzas_raw():
             file_path=LOCAL_GESTIONES,
             container_name=CONTAINER_NAME,
             grupo=GRUPO,
-            contexto=contexto
+            contexto=contexto,
+            conexion=WASB_CONN_ID
         )
 
     @task
@@ -86,7 +89,8 @@ def dag_cobranzas_raw():
             file_path=LOCAL_RECUPEROS,
             container_name=CONTAINER_NAME,
             grupo=GRUPO,
-            contexto=contexto
+            contexto=contexto,
+            conexion=WASB_CONN_ID
         )
 
     @task
